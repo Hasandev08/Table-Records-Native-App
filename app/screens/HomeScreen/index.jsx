@@ -10,7 +10,7 @@ function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState('')
   const [currentTime, setCurrentTime] = useState('')
 
-  useEffect(() => {
+  const getData = () => {
     var date = new Date().getDate()
     var month = new Date().getMonth()
     var year = new Date().getFullYear()
@@ -19,6 +19,10 @@ function HomeScreen({ navigation }) {
 
     setCurrentDate(month + '/' + date + '/' + year)
     setCurrentTime(hours + ':' + mins)
+  }
+
+  useEffect(() => {
+    getData()
   }, [])
 
   return (
@@ -26,15 +30,17 @@ function HomeScreen({ navigation }) {
       <Navbar />
       <View style={styles.body}>
         <Image source={require('../../../assets/logo.png')} style={styles.logo} />
-        <AppButton
-          title='Record Tap X'
-          onPress={() => navigation.navigate('TableScreen', { Value: currentTime })}
-        />
-        <AppButton title='Record Tap Y' />
+        <AppButton title='Record Tap X' onPress={getData} />
+        <AppButton title='Record Tap Y' onPress={getData} />
         <AppButton
           title='View Table'
           color='tableButton'
-          onPress={() => navigation.navigate('TableScreen')}
+          onPress={() =>
+            navigation.navigate('TableScreen', {
+              currentDate: { currentDate },
+              currentTime: { currentTime },
+            })
+          }
         />
       </View>
     </View>
