@@ -73,7 +73,7 @@ function TableScreen({ navigation, route }) {
 
   return (
     <View style={{ paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
-      <Navbar />
+      <Navbar navigation={navigation} />
       <ScrollView>
         <View style={styles.body}>
           <View style={styles.table}>

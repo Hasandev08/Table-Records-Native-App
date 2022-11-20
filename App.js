@@ -4,10 +4,11 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 
 import HomeScreen from './app/screens/HomeScreen'
 import TableScreen from './app/screens/TableScreen'
+import Drawer from './app/components/Drawer'
 
 export default function App() {
-  const Stack = createNativeStackNavigator()
-  const Drawer = createDrawerNavigator()
+  // const Stack = createNativeStackNavigator()
+  const Stack = createDrawerNavigator()
 
   return (
     <NavigationContainer>
@@ -15,14 +16,10 @@ export default function App() {
         <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name='TableScreen' component={TableScreen} options={{ headerShown: false }} />
       </Stack.Navigator> */}
-      <Drawer.Navigator initialRouteName='Home'>
-        <Drawer.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
-        <Drawer.Screen
-          name='TableScreen'
-          component={TableScreen}
-          options={{ headerShown: false }}
-        />
-      </Drawer.Navigator>
+      <Stack.Navigator initialRouteName='Home' drawerContent={(props) => <Drawer {...props} />}>
+        <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name='TableScreen' component={TableScreen} options={{ headerShown: false }} />
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }

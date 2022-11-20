@@ -5,9 +5,9 @@ import MenuButton from '../MenuButton'
 
 import { styles } from './style'
 
-const Navbar = (props) => (
+const Navbar = ({ navigation }) => (
   <View style={styles.navbar}>
-    <MenuButton />
+    <MenuButton navigation={navigation} />
     <Text style={styles.text}>welcome, user@username.com</Text>
   </View>
 )

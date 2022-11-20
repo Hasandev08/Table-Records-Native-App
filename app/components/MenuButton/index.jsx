@@ -6,10 +6,10 @@ import { Ionicons } from '@expo/vector-icons'
 
 import colors from '../../config/colors'
 
-const MenuButton = () => (
+const MenuButton = ({ navigation }) => (
   <View>
-    <TouchableWithoutFeedback>
-      <Ionicons name='menu' size={56} color={colors.white} />
+    <TouchableWithoutFeedback onPress={() => navigation.openDrawer()} >
+      <Ionicons name='menu' size={45} color={colors.white} />
     </TouchableWithoutFeedback>
   </View>
 )

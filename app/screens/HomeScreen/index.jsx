@@ -43,7 +43,7 @@ function HomeScreen({ navigation }) {
 
   return (
     <View style={{ paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
-      <Navbar />
+      <Navbar navigation={navigation} />
       <View style={styles.body}>
         <Image source={require('../../../assets/logo.png')} style={styles.logo} />
         <AppButton title='Record Tap X' onPress={getDataX} />
