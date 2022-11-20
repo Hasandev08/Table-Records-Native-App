@@ -7,18 +7,25 @@ import Navbar from '../../components/Navbar'
 import { styles } from './style'
 
 function HomeScreen({ navigation }) {
-  const [currentDate, setCurrentDate] = useState('')
-  const [currentTime, setCurrentTime] = useState('')
+  // const [currentDate, setCurrentDate] = useState('')
+  // const [currentTime, setCurrentTime] = useState('')
+  const [currentData, setCurrentData] = useState({})
 
   const getData = () => {
-    var date = new Date().getDate()
+    var day = new Date().getDate()
     var month = new Date().getMonth()
     var year = new Date().getFullYear()
     var hours = new Date().getHours()
     var mins = new Date().getMinutes()
 
-    setCurrentDate(month + '/' + date + '/' + year)
-    setCurrentTime(hours + ':' + mins)
+    var date = month + '/' + day + '/' + year
+    var time = hours + ':' + mins
+
+    setCurrentData([date, time])
+    console.log(currentData)
+
+    // setCurrentDate(month + '/' + date + '/' + year)
+    // setCurrentTime(hours + ':' + mins)
   }
 
   useEffect(() => {
@@ -37,8 +44,7 @@ function HomeScreen({ navigation }) {
           color='tableButton'
           onPress={() =>
             navigation.navigate('TableScreen', {
-              currentDate: { currentDate },
-              currentTime: { currentTime },
+              data: { currentData },
             })
           }
         />
