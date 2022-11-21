@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Platform, ScrollView, StatusBar, Text, View } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import AppButton from '../../components/AppButton'
 import Navbar from '../../components/Navbar'
@@ -10,24 +11,36 @@ import { shareAsync } from 'expo-sharing'
 import { styles } from './style'
 
 function TableScreen({ navigation, route }) {
-  const { data } = route.params
+  const [currentData, setData ] = useState([])
 
-  var table = ''
+  const getData = async () => {
+    let tableData = await AsyncStorage.getItem('tableData')
+    tableData = JSON.parse(tableData)
+    console.log(tableData)
+    setData(tableData)
+  }
 
-  for (let i in data.currentData) {
-    const item = data.currentData[i]
-    table =
-      table +
-      `
+  useEffect(() => {
+    getData()
+  }, [route.params])
+
+  const generatePdf = async () => {
+    var table = ''
+
+    for (let i in currentData) {
+      const item = currentData[i]
+      table =
+        table +
+        `
     <tr>
       <td>${item.date}</td>
       <td>${item.time}</td>
       <td>${item.type}</td>
     </tr>
     `
-  }
+    }
 
-  const html = `
+    const html = `
     <html>
     <head>
     <style>
@@ -40,7 +53,7 @@ function TableScreen({ navigation, route }) {
     td, th {
       border: 1px solid #99acff;
       text-align: center;
-      padding: 10px;
+    padding: 10px;
     }
 
     th {
@@ -63,7 +76,6 @@ function TableScreen({ navigation, route }) {
     </html>
     `
 
-  const generatePdf = async () => {
     const file = await printToFileAsync({
       html: html,
       base64: false,
@@ -82,7 +94,7 @@ function TableScreen({ navigation, route }) {
               <Text style={styles.header}>Time</Text>
               <Text style={styles.header}>Type(X/Y)</Text>
             </View>
-            {data.currentData.map((item, index) => (
+            {currentData.map((item, index) => (
               <View key={index.toString()}>
                 <View style={styles.entities}>
                   <Text style={styles.entries}>{item.date}</Text>

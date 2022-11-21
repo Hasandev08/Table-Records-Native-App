@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Image, Platform, StatusBar, View } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import AppButton from '../../components/AppButton'
 import Navbar from '../../components/Navbar'
@@ -33,18 +34,22 @@ function HomeScreen({ navigation }) {
     return { date, time }
   }
 
-  const getDataX = () => {
+  const getDataX = async () => {
+    await AsyncStorage.removeItem('tableData')
     let tempCurrentData = [...currentData]
-    tempCurrentData.unshift({ ...getDate(), ...{ type: 'Type X' } })
+    tempCurrentData.unshift({ ...getDate(), type: 'Type X' })
 
-    setCurrentData(() => tempCurrentData)
+    await AsyncStorage.setItem('tableData', JSON.stringify(tempCurrentData))
+    setCurrentData(tempCurrentData)
   }
 
-  const getDataY = () => {
+  const getDataY = async () => {
+    await AsyncStorage.removeItem('tableData')
     let tempCurrentData = [...currentData]
-    tempCurrentData.unshift({ ...getDate(), ...{ type: 'Type Y' } })
+    tempCurrentData.unshift({ ...getDate(), type: 'Type Y' })
 
-    setCurrentData(() => tempCurrentData)
+    await AsyncStorage.setItem('tableData', JSON.stringify(tempCurrentData))
+    setCurrentData(tempCurrentData)
   }
 
   return (

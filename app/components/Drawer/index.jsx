@@ -18,7 +18,7 @@ const Drawer = ({ navigation }) => (
           <AntDesign name='caretright' size={26} color={colors.white} />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate('TableScreen')}
           activeOpacity={0.7}
           style={styles.routeBtn}
         >
