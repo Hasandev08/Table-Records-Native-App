@@ -18,10 +18,16 @@ function HomeScreen({ navigation }) {
 
     var date = month + '/' + day + '/' + year
 
-    if (hours > 12) {
-      var time = (hours % 12) + ':' + mins + ' PM'
+    if (mins < 10) {
+      var minutes = '0' + mins
     } else {
-      var time = hours + ':' + mins + ' AM'
+      var minutes = mins
+    }
+
+    if (hours > 12) {
+      var time = (hours % 12) + ':' + minutes + ' PM'
+    } else {
+      var time = hours + ':' + minutes + ' AM'
     }
 
     return { date, time }

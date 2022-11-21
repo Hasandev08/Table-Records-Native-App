@@ -43,4 +43,9 @@ export const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingLeft: 60,
   },
+  buttons: {
+    width: '100%',
+    marginBottom: 100,
+    alignItems: 'center',
+  },
 })

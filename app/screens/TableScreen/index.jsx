@@ -92,8 +92,14 @@ function TableScreen({ navigation, route }) {
               </View>
             ))}
           </View>
-          <AppButton title='Save' onPress={generatePdf} />
-          <AppButton title='Back' color='tableButton' onPress={() => navigation.navigate('Home')} />
+          <View style={styles.buttons}>
+            <AppButton title='Save' onPress={generatePdf} />
+            <AppButton
+              title='Back'
+              color='tableButton'
+              onPress={() => navigation.navigate('Home')}
+            />
+          </View>
         </View>
       </ScrollView>
     </View>
