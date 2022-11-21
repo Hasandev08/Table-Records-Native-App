@@ -16,7 +16,6 @@ function TableScreen({ navigation, route }) {
   const getData = async () => {
     let tableData = await AsyncStorage.getItem('tableData')
     tableData = JSON.parse(tableData)
-    console.log(tableData)
     setData(tableData)
   }
 
